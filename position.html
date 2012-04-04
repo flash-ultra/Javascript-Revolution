@@ -1,0 +1,64 @@
+<html>
+<head>
+<script type="text/javascript">
+/*function getOffset( el ) {
+    var _x = 0;
+    var _y = 0;
+    while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
+        _x += el.offsetLeft - el.scrollLeft;
+        _y += el.offsetTop - el.scrollTop;
+        el = el.parentNode;
+    }
+    console.log( { top: _y, left: _x });
+}*/
+
+function getOffset( el ) {
+    var _x = 0;
+    var _y = 0;
+    while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
+        _x += el.offsetLeft - el.scrollLeft;
+        _y += el.offsetTop - el.scrollTop;
+        el = el.offsetParent;
+    }
+    console.log( { top: _y, left: _x } );
+}
+
+</script>
+<script type="text/javascript" src="de/flash_ultra/core/Classbuilder.js"></script>
+<script type="text/javascript" src="de/flash_ultra/util/String.js"></script>
+</head>
+<body>   
+<div style="position:absolute;top:90px;left:40px">   
+<h1 style="padding:30px;background:#334455;" id="target">Ich bin ein normaler Text.</h1>
+</div>
+<script type="text/javascript">
+
+  var charMap = [];
+  
+  function iterate(node){
+      if(node.childNodes.length > 0){
+          for(i=0;i<node.childNodes.length;i++){
+              curChild = node.childNodes[i];
+              if(curChild.nodeType == 3 && String(curChild.nodeValue).trim().length > 1){                  
+                  var chars = curChild.nodeValue.split("");
+                  var newNodeValue = "";
+                  var newElement = document.createElement("span");
+                  
+                  for(i=0;i<chars.length;i++){      
+                      newNodeValue += '<span onmouseover="this.style.backgroundColor = \'#FFFF00\'">' + chars[i] + '</span>';
+                  }                  
+                  newElement.setAttribute('class', 'char-wrapper');
+                  curChild.parentNode.replaceChild(newElement, curChild);
+                  newElement.innerHTML = newNodeValue;
+              }else{
+                  iterate(curChild);
+              }
+          }
+      }
+  }
+  
+  iterate(document.body);
+  
+</script>
+</body>
+</html>
