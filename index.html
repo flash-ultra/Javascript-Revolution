@@ -1,158 +1,120 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-		<title>Javascript OOP Sample</title>
-		<script type="text/javascript" language="javascript" src="de/flash_ultra/core/Classbuilder.js"></script>
-		<!--[if lte IE 9]><!--> <script type="text/javascript" language="javascript" src="de/flash_ultra/core/Xpath.js"></script> <!--<![endif]-->		
-		<script type="text/javascript" language="javascript" src="de/flash_ultra/util/String.js"></script>
-		<script type="text/javascript" language="javascript" src="de/flash_ultra/util/Number.js"></script>
-		<script type="text/javascript" language="javascript" src="de/flash_ultra/util/Date.js"></script>
-		<script type="text/javascript" language="javascript" src="de/flash_ultra/util/Encrypt.js"></script>
-		<script type="text/javascript" language="javascript" src="de/flash_ultra/util/JSON.js"></script>
-		<script type="text/javascript" language="javascript" src="de/flash_ultra/util/I18n.js"></script>
-		<script type="text/javascript" language="javascript" src="de/flash_ultra/util/LZW.js"></script>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+        <title>Javascript OOP Sample</title>
+        <script type="text/javascript" language="javascript" src="de/flash_ultra/core/Classbuilder.js"></script>
+        <!--[if lte IE 9]><!-->
+        <script type="text/javascript" language="javascript" src="de/flash_ultra/core/Xpath.js"></script>
+        <!--<![endif]-->
+        <script type="text/javascript" language="javascript" src="de/flash_ultra/util/String.js"></script>
+        <script type="text/javascript" language="javascript" src="de/flash_ultra/util/Number.js"></script>
+        <script type="text/javascript" language="javascript" src="de/flash_ultra/util/Date.js"></script>
+        <script type="text/javascript" language="javascript" src="de/flash_ultra/util/Encrypt.js"></script>
+        <script type="text/javascript" language="javascript" src="de/flash_ultra/util/JSON.js"></script>
+        <script type="text/javascript" language="javascript" src="de/flash_ultra/util/I18n.js"></script>
+        <script type="text/javascript" language="javascript" src="de/flash_ultra/util/LZW.js"></script>
         <script type="text/javascript" language="javascript" src="de/flash_ultra/util/Array.js"></script>
         <script type="text/javascript" language="javascript" src="de/flash_ultra/util/Boolean.js"></script>
         <script type="text/javascript" language="javascript" src="de/flash_ultra/util/URL.js"></script>
-	</head>
-	<body>
-	<p>Test</p> 
-	<script type="text/javascript">
-
-		_class("A",{
-			
-		    prop_1 : null,
-		    
-		    _constructor: function(value){
-				// public variables
-				this.prop_1 = value;
-			},
-			private_privateMember : "this is the secret",
-			private_privateMethod : function(){
+    </head>
+    <body>
+        <script type="text/javascript">
+        
+            _class("A", {
+        
+                prop_1:null,
+        
+                _constructor:function (value) {
+                    // public variables
+                    this.prop_1 = value;
+                },
+                private_privateMember:"this is the secret",
+                private_privateMethod:function () {
                     alert('A.constructor.privateMethod() = i am a private method...');
-            },
-			getSomething: function(){
-				privateMethod();
-				return this.prop_1;
-			},
-            getPrivate: function(){
-                alert("I´m inside of the getPrivate() method...");
-                privateMethod();
-            },
-			static_setSomethingStatic: function(){
-				alert('static');
-			}
-		});
-		
-		_class("B extends A",{
-			_constructor: function(value, dummy_val){
-				// you can call the constructor of the super class
-				this._super(value);
-				this.prop_2 = dummy_val;
-			},
-			setSomething: function(value){
-				this.prop_1 = value;
-			}
-		});
-		
-		_interface("I",{
-			val:null,
-			getSomething:function(){},
-			setSomething:function(){}
-		});
-		
-		_abstract_class("C implements I",{
-			abstract_myproperty: "cool",
-			val:"hallo",
-			getSomething:function(){},
-			abstract_getSomethingOther:function(){},
-			setSomething:function(){}
-		});
-		
-		_class("D extends C",{
-			getPropertyFromAbstract: function(){
-				return this.myproperty;
-			}
-		});
-		
-		_class("X implements I",{
-			val:"hallo",
-			getSomething:function(){
-				alert("getSomething()");
-			},
-			setSomething:function(){
-				alert("setSomething()");
-			},
-			setSomethingOther:function(){
-				alert("setSomethingOther()");
-			}
-		});
-
-		// this works in Opera, Safari, Firefox, IE >= 9
-		// _class("HTMLElement",{			
-		//		wtf: function(){
-		//				alert("this is cool shit...");
-		//		},
-		//		whatTheFuck: "this rocks..."
-		//	});
-		//		
-		//	// IE 8 needs this implementation
-		//	Element.prototype.wtf = function(){
-		//		alert("this is cool shit...");
-		//	}
-		//	Element.prototype.whatTheFuck = "this rocks...";
-		//		
-		//	<h1>OOP Javascript</h1>
-		//	< script type="text/javascript" >
-		//		document.getElementsByTagName("h1")[0].onclick=function(){
-		//			this.wtf();
-		//			alert(this.whatTheFuck);
-		//		}
-		//	< / script >
-		
-		var x = new X(); // X implements I
-		x.getSomething(); // call required method getSomething() defined in interface I and fully implemented in class X
-		
-		alert(String("Teststring").insertAt(3, " __cool__")); // test the new insertAt method from String.prototype.insertAt
-		
-		alert("Number(23).isPrime() = " + Number(23).isPrime()); // test if the given number is prime
-		
-		var s = ["Item 1", "Item 2"]; // basic array
-
-		var a = new A("class A");
-		a.getSomething();
-		A.setSomethingStatic();
-		var b = new B("class B","set dummy value of B"); // B extends A
-		b.getSomething();
-		
-		// var c = new C(); // throws an exception because C is an abstract class which implements the interface I
-		var d = new D(); // D extends C
-		
-		var linkCount = document.evaluate("count(//p)", document, null, XPathResult.NUMBER_TYPE, null);
-		alert(linkCount);
-
-		var cal = new Date("July 15, 2011"); // standard Date object
-		document.writeln(cal.calendar()); // draw a calendar => Date.prototype.calendar()
-		
-		comp = LZW.compress("TOBEORNOTTOBEORTOBEORNOT");
-	    decomp = LZW.decompress(comp);
-	    console.log(comp);
-	    console.log(decomp);
-		
-		
-		alert(cal.getMonthName());	// get the month name from Date object => Date.prototype.getMonthName()
-		alert(cal.daysInMonth());	// get the number of days from Date object => Date.prototype.daysInMonth()
-		alert(cal.customFormat("#DD#.#MM#.#YYYY# #hh#:#mm#:#ss#")); // get the formatted date from Date object => Date.prototype.customFormat()
-
-        alert('d.getPropertyFromAbstract() = ' + d.getPropertyFromAbstract()); // call an inherited method from an abstract class
-		
-		alert('a.getSomething() = ' + a.getSomething()); // call implemented method
-		alert('a.getPrivate() = ' + a.getPrivate()); // call private method implemented in class A constructor
-		
-		alert('b.getSomething() = ' + b.getSomething()); // call inherited method implemented in class A
-		b.setSomething('new Value'); // set a new value for inherited property prop_1 of class A to "new Value"
-		alert('b.getSomething() = ' + b.getSomething()); // get the new value from inherited property prop_1 of class A
-	</script>	 
-	</body>
+                },
+                getSomething:function () {
+                    privateMethod();
+                    return this.prop_1;
+                },
+                getPrivate:function () {
+                    alert("IÂ´m inside of the getPrivate() method...");
+                    privateMethod();
+                },
+                static_setSomethingStatic:function () {
+                    alert('static');
+                }
+            });
+        
+            _class("B extends A", {
+                _constructor:function (value, dummy_val) {
+                    // you can call the constructor of the super class
+                    this._super(value);
+                    this.prop_2 = dummy_val;
+                },
+                setSomething:function (value) {
+                    this.prop_1 = value;
+                }
+            });
+        
+            _interface("I", {
+                val:null,
+                getSomething:function () {
+                },
+                setSomething:function () {
+                }
+            });
+        
+            _abstract_class("C implements I", {
+                abstract_myproperty:"cool",
+                val:"hallo",
+                getSomething:function () {
+                },
+                abstract_getSomethingOther:function () {
+                },
+                setSomething:function () {
+                }
+            });
+        
+            _class("D extends C", {
+                getPropertyFromAbstract:function () {
+                    return this.myproperty;
+                }
+            });
+        
+            _class("X implements I", {
+                val:"hallo",
+                getSomething:function () {
+                    alert("getSomething()");
+                },
+                setSomething:function () {
+                    alert("setSomething()");
+                },
+                setSomethingOther:function () {
+                    alert("setSomethingOther()");
+                }
+            });
+        
+            // X implements I
+            var x = new X();
+            
+            // call required method getSomething() defined in interface I and fully implemented in class X
+            x.getSomething();
+        
+            var a = new A("class A");
+            a.getSomething();
+            A.setSomethingStatic();
+            
+            var b = new B("class B", "set dummy value of B"); // B extends A
+            b.getSomething();
+        
+            // throws an exception because C is an abstract class which implements the interface I
+            var c = new C();
+        
+            // but you can extend the abstract class C
+            var d = new D();
+        
+        </script>
+    </body>
 </html>
