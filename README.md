@@ -1,6 +1,6 @@
 ### Abstract classes, private methods and variables, inheritance in JavaScript?
 
-This is a very old library i wrote to provide exactly that. Have fun exploring and let me know what you think about it.
+This is a very very very old library i wrote to provide exactly that. Have fun exploring and let me know what you think about it.
 
 ```
 _class("A", {
